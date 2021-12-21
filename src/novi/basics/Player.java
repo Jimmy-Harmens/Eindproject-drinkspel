@@ -19,6 +19,9 @@ public class Player {
     public ArrayList<PlayingCards> getHand(){
         return hand;
     }
+    public void clearHand(){
+        hand.clear();
+    }
     public int getSlokkenGenomen(){
         return slokkenGenomen;
     }

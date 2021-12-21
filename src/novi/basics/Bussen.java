@@ -1,6 +1,7 @@
 package novi.basics;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Bussen extends Cardgame{
@@ -172,23 +173,94 @@ public class Bussen extends Cardgame{
                 }
             }
         }
-
-        //hier even het field printen om te zien of dit goed werkt:
-        /*
-        for(PlayingCards[] rij : field){
-            System.out.print("rij " + (field.indexOf(rij)+1) + ": ");
-            for(int i=aantalRijen-field.indexOf(rij)-1; i>0; i--)
-                System.out.print(" ");
-            for(PlayingCards card : rij){
-                if(card.revealed){
-                    System.out.print(card.getShorthand() + " ");
+    }
+    public void bussenRonde3(ArrayList<Player> spelers){
+        resetDeck();
+        field.clear();
+        Random random = new Random();
+        Scanner input = new Scanner(System.in);
+        ArrayList<Player> passagiers = new ArrayList<>();
+        //bepalen wie er in de bus gaan
+        int largestHand = 0;
+        for(Player speler : spelers){
+            if(speler.getHand().size()>largestHand){
+                largestHand =speler.getHand().size();
+            }
+        }
+        for(Player speler : spelers){
+            if(speler.getHand().size() == largestHand){
+                passagiers.add(speler);
+            }
+        }
+        System.out.println("hier zijn de passagiers:");
+        for(Player passagier : passagiers){
+            System.out.println(passagier.getName());
+        }
+        System.out.println("hoelang is de bus?\ntyp 'Random' voor een random bus van 5 tot 10 kaarten lang");
+        String busLengteInput = input.nextLine();
+        int busLengte;
+        if(busLengteInput.equalsIgnoreCase("Random")){
+            busLengte = random.nextInt(6) + 5;
+        }
+        else{
+            busLengte = Integer.parseInt(busLengteInput);
+        }
+        PlayingCards[] bus = new PlayingCards[busLengte];
+        for(int i=0; i<busLengte; i++){
+            PlayingCards kaartInBus = getCardFromDeck();
+            kaartInBus.revealed = false;
+            bus[i] = kaartInBus;
+        }
+        //print bus
+        System.out.println("Hier is de bus!");
+        int geraaddeKaarten = 0;
+        while(geraaddeKaarten < busLengte){
+            int counter = 0;
+            for(PlayingCards currentCard : bus){
+                for(PlayingCards displayCard : bus){
+                    if(displayCard.revealed){
+                        System.out.print(displayCard.getShorthand() + " ");
+                    }
+                    else{
+                        System.out.print("?? ");
+                    }
+                }
+                System.out.println("\nHoger of Lager?");
+                String gegevenAntwoord = input.nextLine();
+                //nieuwe kaart trekken en bepalen of deze hoger of lager is
+                PlayingCards nextCard = getCardFromDeck();
+                String realAnswer;
+                if(nextCard.getHiddenvalue()>currentCard.getHiddenvalue()){
+                    realAnswer = "Hoger";
+                }
+                else if(nextCard.getHiddenvalue()<currentCard.getHiddenvalue()){
+                    realAnswer = "Lager";
                 }
                 else{
-                    System.out.print("?? ");
+                    realAnswer = "Gelijk";
                 }
+                //gegeven antwoord vergelijken met echte antwoord en consequenties bepalen.
+                if(gegevenAntwoord.equalsIgnoreCase(realAnswer)){
+                    nextCard.revealed = true;
+                    bus[counter] = nextCard;
+                    geraaddeKaarten++;
+                    System.out.println("De eerste kaart was een " + currentCard.getType() + " " + currentCard.getValue());
+                    System.out.println("De kaart was een " + nextCard.getType() + " " + nextCard.getValue());
+                    System.out.println("Correct! Door naar de volgende kaart.");
+                }
+                else{
+                    nextCard.revealed = true;
+                    bus[counter] = nextCard;
+                    geraaddeKaarten = 0;
+                    for(Player passagier : passagiers){
+                        passagier.zuipen(counter+1);
+                    }
+                    System.out.println("De kaart was een " + nextCard.getType() + " " + nextCard.getValue());
+                    System.out.println("Helaas! De passagiers namen elk " + (counter+1) + " slokken. We beginnen weer vanaf het begin. ");
+                    break;
+                }
+                counter++;
             }
-            System.out.print("\n");
         }
-        */
     }
 }

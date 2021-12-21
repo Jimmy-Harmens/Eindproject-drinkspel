@@ -33,4 +33,11 @@ public abstract class Cardgame {
     public ArrayList<PlayingCards> getDeck(){
         return deck;
     }
+    public void resetDeck(){
+        deck.clear();
+        for(int i=0; i<52; i++){
+            PlayingCards card = new PlayingCards(i);
+            deck.add(card);
+        }
+    }
 }

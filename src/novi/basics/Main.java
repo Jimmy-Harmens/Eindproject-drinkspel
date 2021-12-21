@@ -32,5 +32,6 @@ public class Main {
         Bussen eersteSpel = new Bussen();
         eersteSpel.bussenRonde1(spelers);
         eersteSpel.bussenRonde2(spelers);
+        eersteSpel.bussenRonde3(spelers);
     }
 }
