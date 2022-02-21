@@ -24,7 +24,7 @@ public class Bussen extends Cardgame{
                 speler.zuipen(1);
             }
             System.out.println("Totaal aantal slokken van " + speler.getName() + ": " + speler.getSlokkenGenomen() + "\n");
-        }
+        }//eerste kaart
         for(Player speler : spelers){ //tweede kaart per speler
             PlayingCards currentCard = assignAndReturnCard(speler);
             System.out.println(speler.getName() + ", Hoger of Lager?");
@@ -46,8 +46,8 @@ public class Bussen extends Cardgame{
             }
             System.out.println("Totaal aantal slokken van " + speler.getName() + ": " + speler.getSlokkenGenomen() + "\n");
 
-        }
-        for(Player speler : spelers) { //Derde kaart per speler
+        }//tweede kaart
+        for(Player speler : spelers){ //Derde kaart per speler
             PlayingCards currentCard = assignAndReturnCard(speler);
             System.out.println(speler.getName() + ", Binnen of Buiten?");
             String binnenOfBuiten = input.nextLine();
@@ -67,8 +67,8 @@ public class Bussen extends Cardgame{
                 speler.zuipen(1);
             }
             System.out.println("Totaal aantal slokken van " + speler.getName() + ": " + speler.getSlokkenGenomen() + "\n");
-        }
-        for(Player speler : spelers) { //Vierde kaart per speler
+        }//derde kaart
+        for(Player speler : spelers){ //Vierde kaart per speler
             PlayingCards currentCard = assignAndReturnCard(speler);
             System.out.println(speler.getName() + ", Welk type kaart?");
             String typeCard = input.nextLine();
@@ -98,7 +98,7 @@ public class Bussen extends Cardgame{
                 }
             }
             System.out.println("Totaal aantal slokken van " + speler.getName() + ": " + speler.getSlokkenGenomen() + "\n");
-        }
+        }//vierde kaart
     }
 
     public void bussenRonde2(ArrayList<Player> spelers){
@@ -260,6 +260,7 @@ public class Bussen extends Cardgame{
                     break;
                 }
                 counter++;
+                //nog niet klaar! nog geen win condition.
             }
         }
     }

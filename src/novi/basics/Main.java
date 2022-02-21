@@ -29,9 +29,16 @@ public class Main {
             }
         }while(!playersComplete);
 
-        Bussen eersteSpel = new Bussen();
-        eersteSpel.bussenRonde1(spelers);
-        eersteSpel.bussenRonde2(spelers);
-        eersteSpel.bussenRonde3(spelers);
+//        Bussen eersteSpel = new Bussen();
+//        eersteSpel.bussenRonde1(spelers);
+//        eersteSpel.bussenRonde2(spelers);
+//        eersteSpel.bussenRonde3(spelers);
+
+        FuckTheDealer tweedeSpel = new FuckTheDealer();
+        tweedeSpel.FTDronde1(spelers);
+
+//        KamelenRacen derdeSpel = new KamelenRacen();
+//        derdeSpel.kamelenRaceGame(spelers);
+//        derdeSpel.printField();
     }
 }
